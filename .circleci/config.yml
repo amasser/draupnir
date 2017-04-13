@@ -4,7 +4,7 @@ jobs:
     machine: true
     environment:
       KNIFE_ENV: test
-    working_directory: ~/go/src/github.com/gocardless/draupnir
+    working_directory: ~/.go_workspace/src/github.com/gocardless/draupnir
     steps:
       - checkout
       - run:
@@ -16,7 +16,7 @@ jobs:
           key: dependency-cache-{{ checksum "Gemfile.lock" }}
       - run:
           name: Install Ruby bundle
-          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+          command: bundle install --path=vendor/bundle --jobs=4 --retry=3
       - save_cache:
           paths:
             - vendor/bundle
