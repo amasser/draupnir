@@ -4,7 +4,7 @@ jobs:
     machine: true
     environment:
       KNIFE_ENV: test
-    working_directory: /go/src/github.com/gocardless/draupnir
+    working_directory: ~/go/src/github.com/gocardless/draupnir
     steps:
       - checkout
       - run:
