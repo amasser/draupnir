@@ -25,6 +25,11 @@ jobs:
           name: Setup cookbook
           command: make setup-cookbook
       - run:
+          name: Debug info
+          command: |
+            pwd
+            ls /usr/local/go/src/
+      - run:
           name: Unit Tests
           command: make test
       - run:
