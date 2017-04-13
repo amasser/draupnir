@@ -4,9 +4,14 @@ jobs:
     machine: true
     environment:
       KNIFE_ENV: test
-    working_directory: ~/draupnir
+    working_directory: /go/src/github.com/gocardless/draupnir
     steps:
       - checkout
+      - run:
+          name: Install Gom
+          command: go get github.com/mattn/gom
+      - run:
+          command: gom install
       - restore_cache:
           key: dependency-cache-{{ checksum "Gemfile.lock" }}
       - run:
