@@ -18,14 +18,14 @@ jobs:
       - run:
           command: gom install
       - restore_cache:
-          key: dependency-cache-{{ checksum "Gemfile.lock" }}
+          key: gem-cache-{{ checksum "Gemfile.lock" }}
       - run:
           name: Install Ruby bundle
           command: bundle install --path=vendor/bundle --jobs=4 --retry=3
       - save_cache:
           paths:
             - vendor/bundle
-          key: dependency-cache-{{ checksum "Gemfile.lock" }}
+          key: gem-cache-{{ checksum "Gemfile.lock" }}
       - run:
           name: Setup cookbook
           command: make setup-cookbook
@@ -37,6 +37,9 @@ jobs:
       - run:
           name: Unit Tests
           command: make test
+      - run:
+          name: VBox
+          command: VBoxManage --version
       - run:
           name: Integration Tests
           command: make test-integration
