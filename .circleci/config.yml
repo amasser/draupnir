@@ -8,6 +8,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install Vagrant
+          command: sudo apt-get install vagrant
+      - run:
           name: Install Gom
           command: go get github.com/mattn/gom
       - run:
