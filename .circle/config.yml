@@ -1,0 +1,27 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    environment:
+      KNIFE_ENV: test
+    working_directory: ~/draupnir
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Install Ruby bundle
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      - save_cache:
+          paths:
+            - vendor/bundle
+          key: dependency-cache-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Setup cookbook
+          command: make setup-cookbook
+      - run:
+          name: Run Rubocop
+          command: bundle exec rubocop -L | circleci tests split | xargs bundle exec rubocop
+      - run:
+          name: Kitchen Test
+          command: make test-integration
