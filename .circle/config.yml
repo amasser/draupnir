@@ -20,8 +20,8 @@ jobs:
           name: Setup cookbook
           command: make setup-cookbook
       - run:
-          name: Run Rubocop
-          command: bundle exec rubocop -L | circleci tests split | xargs bundle exec rubocop
+          name: Unit Tests
+          command: make test
       - run:
-          name: Kitchen Test
+          name: Integration Tests
           command: make test-integration
