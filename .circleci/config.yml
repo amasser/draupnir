@@ -9,7 +9,9 @@ jobs:
       - checkout
       - run:
           name: Install system dependencies
-          command: sudo apt-get install vagrant linux-headers-generic virtualbox-dkms virtualbox
+          command: |
+            sudo apt-get update
+            sudo apt-get install vagrant linux-headers-generic virtualbox-dkms virtualbox
       - run:
           name: Install Gom
           command: go get github.com/mattn/gom
