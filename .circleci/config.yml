@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run:
           name: Install system dependencies
-          command: sudo apt-get install vagrant virtualbox
+          command: sudo apt-get install vagrant virtualbox-dkms virtualbox
       - run:
           name: Install Gom
           command: go get github.com/mattn/gom
